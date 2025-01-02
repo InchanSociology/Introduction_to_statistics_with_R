@@ -1,0 +1,110 @@
+---
+title: "Regression Analysis Calculation"
+fontsize: 11pt
+geometry: a4paper
+output: pdf_document
+---
+
+# Introduction
+
+This document calculates and explains the following:
+- **Variance** (\(Var(X)\)): Measures how much X values deviate from their mean.
+- **Covariance** (\(Cov(X, Y)\)): Measures how X and Y vary together.
+- **Regression slope** (\(\beta_1\)): The rate at which Y changes with X.
+
+The dataset consists of High School GPA (\(X\)) and First Year GPA (\(Y\)) for 10 students.
+
+# Dataset
+
+```{r}
+students <- data.frame(
+  Student = paste("Student", 1:10),
+  High_School_GPA = c(3.0, 3.2, 3.5, 3.8, 3.6, 3.1, 3.9, 3.4, 3.7, 3.2),
+  First_Year_GPA = c(2.8, 3.0, 3.2, 3.8, 3.6, 3.3, 3.9, 3.7, 4.0, 2.5)
+)
+
+knitr::kable(students, caption = "High School GPA and First Year GPA Dataset")
+```
+
+---
+
+# Step 1: Variance of X
+
+Variance measures how much the values of X (High School GPA) deviate from their mean.
+
+## Formula
+\[
+\text{Var}(X) = \frac{1}{n} \sum_{i=1}^{n} (X_i - \bar{X})^2
+\]
+
+## Steps
+1. Compute the mean of X (\( \bar{X} \)).
+2. Compute deviations from the mean and square them.
+3. Compute the average of the squared deviations.
+
+```{r}
+# Variance calculation
+X <- students$High_School_GPA
+mean_X <- mean(X)
+students$Deviation_X <- paste(X, "-", round(mean_X, 2), "=", round(X - mean_X, 2))
+students$Squared_Deviation_X <- (X - mean_X)^2
+variance_X <- mean((X - mean_X)^2)
+
+knitr::kable(students[, c("Student", "High_School_GPA", "Deviation_X", "Squared_Deviation_X")],
+             caption = "Step-by-step Variance Calculation for High School GPA")
+```
+
+The variance of X (\( \text{Var}(X) \)) is:
+
+```{r}
+variance_X
+```
+
+# Step 2: Covariance of X and Y
+
+Covariance measures how X and Y vary together. A positive covariance indicates that when X increases,Y tends to increase as well.
+
+## Formula
+\[
+\text{Cov}(X, Y) = \frac{1}{n} \sum_{i=1}^{n} (X_i - \bar{X})(Y_i - \bar{Y})
+\]
+
+## Steps
+1. Compute the means of X and Y (\( \bar{X} \) and \( \bar{Y} \)).
+2. Compute deviations from the mean for both variables.
+3. Compute the product of deviations for each pair.
+4. Compute the average of these products.
+
+```{r}
+# Covariance calculation
+Y <- students$First_Year_GPA
+mean_Y <- mean(Y)
+students$Deviation_Y <- paste(Y, "-", round(mean_Y, 2), "=", round(Y - mean_Y, 2))
+students$Product_Deviation <- (X - mean_X) * (Y - mean_Y)
+covariance_XY <- mean((X - mean_X) * (Y - mean_Y))
+
+knitr::kable(students[, c("Student", "High_School_GPA", "First_Year_GPA", "Deviation_X", "Deviation_Y", "Product_Deviation")],
+             caption = "Step-by-step Covariance Calculation between High School GPA and First Year GPA")
+```
+
+The covariance of X and Y (\( \text{Cov}(X, Y) \)) is:
+
+```{r}
+covariance_XY
+```
+
+---
+
+# Step 3: Regression Slope
+
+The regression slope \( \beta_1 \) is calculated as:
+\[
+\beta_1 = \frac{\text{Cov}(X, Y)}{\text{Var}(X)}
+\]
+
+It represents the rate at which Y changes for a one-unit increase in X.
+
+```{r}
+slope <- covariance_XY / variance_X
+slope
+```
