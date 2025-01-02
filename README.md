@@ -6,12 +6,19 @@ Welcome to the **Introduction to Statistics with R** repository! This project is
 
 [Topics Covered]
 
-Chapter 1. T-Test, ANOVA
-Chapter 2. Regression Analysis, Logistic Regression
-Chapter 3. Randomized Controlled Trial (RCT)
-Chapter 4. Difference-in-Differences (DiD)
-Chapter 5. Regression Discontinuity Design (RDD)
-Chapter 6. Propensity Score Weighting (PSW)
-Chapter 7. Doubly Robust Estimation
-Chapter 8. Double Machine Learning (DML)
+- Chapter 1. T-Test, ANOVA
+
+- Chapter 2. Regression Analysis, Logistic Regression
+
+- Chapter 3. Randomized Controlled Trial (RCT)
+
+- Chapter 4. Difference-in-Differences (DiD)
+
+- Chapter 5. Regression Discontinuity Design (RDD)
+
+- Chapter 6. Propensity Score Weighting (PSW)
+
+- Chapter 7. Doubly Robust Estimation
+
+- Chapter 8. Double Machine Learning (DML)
 
